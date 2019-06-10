@@ -1,13 +1,20 @@
 {
 	"folders": [
 		{
+			"name": "ansible",
+			"path": "ansible"
+		},
+		{
+			"name": "pulumi",
 			"path": "pulumi"
 		},
 		{
-			"path": "src"
+			"name": "terraform",
+			"path": "terraform"
 		},
 		{
-			"path": "terraform"
+			"name": "src",
+			"path": "src"
 		}
 	],
 	"settings": {}
