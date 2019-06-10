@@ -32,42 +32,32 @@ To execute from this folder
     export PULUMI_ACCESS_TOKEN="XXXXXXXXXXXXXXXXXXXX"
     ```
 
-2. Define SQL Server username:
+1. Define SQL Server username:
 
     ```bash
     pulumi config set dotnet2019demo:sqlUsername <value>
     ```
 
-3. Define SQL Server password (make it complex enough to satisfy Azure policy):
+1. Define SQL Server password (make it complex enough to satisfy Azure policy):
 
     ```bash
     pulumi config set --secret dotnet2019demo:sqlPassword <value>
     ```
 
-4. Run `pulumi preview` to preview changes:
+1. Run `pulumi preview` to preview changes:
 
     ```bash
     pulumi preview
     ```
 
-5. Run `pulumi up` to deploy changes:
+1. Run `pulumi up` to deploy changes:
 
     ```bash
     pulumi up
     ```
 
-6. Check the deployed website endpoint:
+1. Check the deployed website endpoint:
 
     ```bash
     pulumi stack output endpoint
     ```
-
-## Integrating with Azure DevOps
-
-`azure-pipeline.yml` in the root folder of this example shows a configuration for Azure DevOps using [Pulumi task](https://marketplace.visualstudio.com/items?itemName=pulumi.build-and-release-task).
-
-Pulumi task expects a Pulumi access token to be configured as a build variable. Copy your token from [Access Tokens page](https://app.pulumi.com/account/tokens) and put it into `pulumi.access.token` build variable.
-
-`alternative-pipeline` folder contains custom scripts and a pipeline to run Pulumi program in environments that have to access to the marketplace.
-
-Follow [Azure DevOps](https://pulumi.io/reference/cd-azure-devops.html) guide for more details.
