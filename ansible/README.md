@@ -8,56 +8,25 @@ To execute from this folder
     dotnet publish ../src
     ```
 
-1. Create a new stack:
+1. Define SQL Server username:
 
     ```bash
-    pulumi stack init dev
-    ```
-
-1. Login to Azure CLI (you will be prompted to do this during deployment if you forget this step):
-
-    ```bash
-    az login
-    ```
-
-1. Restore NPM dependencies:
-
-    ```bash
-    npm install
-    ```
-
-1. Set Pulumi access token:
-
-    ```bash
-    export PULUMI_ACCESS_TOKEN="XXXXXXXXXXXXXXXXXXXX"
+    export ANSIBLE_sql_username="XXXXXXXXXXXXXXXXXXXX"
     ```
 
 1. Define SQL Server username:
 
     ```bash
-    pulumi config set dotnet2019demo:sqlUsername <value>
-    ```
+    export ANSIBLE_sql_password="XXXXXXXXXXXXXXXXXXXX"
 
-1. Define SQL Server password (make it complex enough to satisfy Azure policy):
-
-    ```bash
-    pulumi config set --secret dotnet2019demo:sqlPassword <value>
-    ```
-
-1. Run `pulumi preview` to preview changes:
+1. Run the playbook:
 
     ```bash
-    pulumi preview
+    ansible-playbook app.yml
     ```
 
-1. Run `pulumi up` to deploy changes:
+Not implemented in Ansible:
 
-    ```bash
-    pulumi up
-    ```
-
-1. Check the deployed website endpoint:
-
-    ```bash
-    pulumi stack output endpoint
-    ```
+- SAS token. There is no easy way, need to make custom script
+- App insights. Resource no available
+- Connection string. The app resource has not that property. Need to be added manually

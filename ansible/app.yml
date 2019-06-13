@@ -11,8 +11,8 @@
     sqldb_name: "{{ prefix }}-db"
     service_plan_name: "{{ prefix }}-asp"
     app_name: "{{ prefix }}-as"
-    sql_username: avarela
-    sql_password: DotNet2019
+    sql_username: "{{ lookup('env','ANSIBLE_sql_username') }}"
+    sql_password: "{{ lookup('env','ANSIBLE_sql_password') }}"
 
   tasks:
     - name: Zip app
