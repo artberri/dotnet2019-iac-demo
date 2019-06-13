@@ -9,6 +9,8 @@
     resource_group: "{{ prefix }}-rg"
     sqlserver_name: "{{ prefix }}-sql"
     sqldb_name: "{{ prefix }}-db"
+    service_plan_name: "{{ prefix }}-asp"
+    app_name: "{{ prefix }}-as"
     sql_username: avarela
     sql_password: DotNet2019
 
@@ -40,6 +42,7 @@
         resource_group: "{{ resource_group }}"
         storage_account_name: "{{ storage_account }}"
         container: "{{ storage_account_container }}"
+        public_access: blob
         blob: "{{ blob_name }}"
         blob_type: "block"
         src: "./files/app.zip"
@@ -61,3 +64,18 @@
         resource_group: "{{ resource_group }}"
         server_name: "{{ sqlserver_name }}"
       register: sqlserver
+
+    - name: Create App Service Plan
+      azure_rm_appserviceplan:
+        name: "{{ service_plan_name }}"
+        resource_group: "{{ resource_group }}"
+        location: "{{ location }}"
+        sku: B1
+    - name: Create App
+      azure_rm_webapp:
+        name: "{{ app_name }}"
+        resource_group: "{{ resource_group }}"
+        plan: "{{ service_plan_name }}"
+        app_settings:
+          "ASPNETCORE_ENVIRONMENT": "Development"
+          "WEBSITE_RUN_FROM_ZIP": "https://{{ storage_account }}.blob.core.windows.net/{{ storage_account_container }}/{{ blob_name }}"
