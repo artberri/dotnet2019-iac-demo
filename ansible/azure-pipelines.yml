@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - ansible/*
+    - src/*
+    exclude:
+    - ansible/README.md
+    - src/README.md
+    - src/LICENSE.md
+jobs:
+- job: ansible
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      projects: 'src'
+      zipAfterPublish: false
+      modifyOutputPath: false
+    displayName: 'Build and publish ASP.NET Core app'
+  - task: ms-vscs-rm.vss-services-ansible.ansible-task.Ansible@0
+    displayName: 'Run playbook'
+    inputs:
+      playbookPathOnAgentMachine: ansible/app.yml
