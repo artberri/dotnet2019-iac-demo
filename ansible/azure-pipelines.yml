@@ -23,8 +23,11 @@ jobs:
       modifyOutputPath: false
     displayName: 'Build and publish ASP.NET Core app'
   - script: |
+      export ANSIBLE_sql_username="$(sqlUsername)"
+      export ANSIBLE_sql_password="$(sqlPassword)"
       pip install 'ansible[azure]' --user
       az login --service-principal --username $(AZURE_CLIENT_ID) --password $(AZURE_SECRET) --tenant $(AZURE_TENANT)
       az account set --subscription $(AZURE_SUBSCRIPTION_ID)
       ansible-playbook ansible/app.yml
+      az account clear
     displayName: 'Run playbook'
