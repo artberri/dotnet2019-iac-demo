@@ -29,5 +29,5 @@ jobs:
       resourceGroupName: 'armdn2019-rg'
       location: 'West Europe'
       csmFile: arm/azuredeploy.json
-      overrideParameters: '--sqlUsername $(sqlUsername) --sqlPassword $(sqlPassword)'
+      overrideParameters: '-sqlUsername $(sqlUsername) -sqlPassword $(sqlPassword)'
       deploymentMode: Complete
