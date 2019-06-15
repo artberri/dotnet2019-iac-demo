@@ -23,7 +23,6 @@ jobs:
       modifyOutputPath: false
     displayName: 'Build and publish ASP.NET Core app'
   - script: |
-      pip install --upgrade pip --user
       pip install 'ansible[azure]' --user
     displayName: 'Install dependencies'
   - task: ms-vscs-rm.vss-services-ansible.ansible-task.Ansible@0
