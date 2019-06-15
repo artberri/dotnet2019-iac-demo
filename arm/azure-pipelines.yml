@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - arm/*
+    - src/*
+    exclude:
+    - arm/README.md
+    - src/README.md
+    - src/LICENSE.md
+jobs:
+- job: arm
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      projects: 'src'
+      zipAfterPublish: false
+      modifyOutputPath: false
+    displayName: 'Build and publish ASP.NET Core app'
+  - task: AzureResourceGroupDeployment@2
+    displayName: 'Azure Deployment'
+    inputs:
+      azureSubscription: PlainServicePrincipal
+      resourceGroupName: 'armdn2019-rg'
+      location: 'West Europe'
+      csmFile: arm/azuredeploy.json
+      overrideParameters: '--sqlUsername $(sqlUsername) --sqlPassword $(sqlPassword)'
+      deploymentMode: Complete
