@@ -1,3 +1,9 @@
+terraform {
+    backend "azurerm" {
+        key                  = "dotnet2019.tfstate" # Add a name to the state file
+    }
+}
+
 variable "sql_username" {
     description = "Username for the SQL Server."
 }
