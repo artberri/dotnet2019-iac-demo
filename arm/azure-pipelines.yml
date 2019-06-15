@@ -36,4 +36,4 @@ jobs:
     inputs:
       azureSubscription: PlainServicePrincipal
       WebAppName: 'armdn2019-as'
-      packageForLinux: '$(System.DefaultWorkingDirectory)/bin/Debug/netcoreapp2.1/publish'
+      packageForLinux: '$(System.DefaultWorkingDirectory)/src/bin/Debug/netcoreapp2.1/publish'
