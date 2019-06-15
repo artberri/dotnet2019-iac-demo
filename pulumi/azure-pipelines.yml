@@ -29,10 +29,10 @@ jobs:
     displayName: 'NPM install packages'
   - task: Pulumi@0
     inputs:
-      azureSubscription: '695a5d95-a83f-4abe-9afd-9fc2fd58c67f'
+      azureSubscription: 'PlainEnterpriseSubscription'
       command: 'up'
       args: '--yes'
       cwd: 'pulumi'
       stack: 'dev'
-    displayName: 'Install pulumi and run infra code'
+    displayName: 'Exec infrastructure'
     name: pulumi
