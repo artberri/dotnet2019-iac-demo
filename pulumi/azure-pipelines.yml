@@ -39,7 +39,7 @@ jobs:
     inputs:
       azureSubscription: 'PlainServicePrincipal'
       command: 'config'
-      args: 'set set --secret dotnet2019demo:sqlPassword $(sqlPassword)'
+      args: 'set --secret dotnet2019demo:sqlPassword $(sqlPassword)'
       cwd: 'pulumi'
       stack: 'dev'
     displayName: 'Set sql password'
