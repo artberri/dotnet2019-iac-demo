@@ -1,0 +1,38 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - pulumi/*
+    - src/*
+    exclude:
+    - pulumi/README.md
+    - src/README.md
+    - src/LICENSE.md
+jobs:
+- job: pulumiinfrastructure
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      projects: 'src'
+      zipAfterPublish: false
+      modifyOutputPath: false
+    displayName: 'Build and publish ASP.NET Core app'
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      workingDir: 'pulumi'
+    displayName: 'NPM install packages'
+  - task: Pulumi@0
+    inputs:
+      azureSubscription: 'Your Azure Subscription(aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee)'
+      command: 'up'
+      args: '--yes'
+      cwd: 'pulumi'
+      stack: 'dev'
+    displayName: 'Install pulumi and run infra code'
+    name: pulumi
