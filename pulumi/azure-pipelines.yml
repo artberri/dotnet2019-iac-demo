@@ -11,7 +11,7 @@ trigger:
     - src/README.md
     - src/LICENSE.md
 jobs:
-- job: pulumiinfrastructure
+- job: pulumi
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
@@ -29,7 +29,7 @@ jobs:
     displayName: 'NPM install packages'
   - task: Pulumi@0
     inputs:
-      azureSubscription: 'PlainEnterpriseSubscription'
+      azureSubscription: 'PlainServicePrincipal'
       command: 'up'
       args: '--yes'
       cwd: 'pulumi'
