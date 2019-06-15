@@ -25,6 +25,14 @@ jobs:
   - script: |
       pip install 'ansible[azure]' --user
     displayName: 'Install dependencies'
+  - task: AzureCLI@1
+    displayName: 'Azure Login'
+    inputs:
+      azureSubscription: PlainServicePrincipal
+      scriptLocation: inlineScript
+      inlineScript: |
+       az login --service-principal --username $(AZURE_CLIENT_ID) --password $(AZURE_SECRET) --tenant $(AZURE_TENANT)
+       az account set --subscription $(AZURE_SUBSCRIPTION_ID)
   - task: ms-vscs-rm.vss-services-ansible.ansible-task.Ansible@0
     displayName: 'Run playbook'
     inputs:
