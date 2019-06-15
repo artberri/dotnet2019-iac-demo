@@ -25,7 +25,7 @@ jobs:
   - task: Terraform@2
     inputs:
       TemplatePath: 'terraform'
-      Arguments: 'apply -target azurerm_app_service.main'
+      Arguments: 'apply -target azurerm_app_service.main -auto-approve -var "sql_username=$(sqlUsername)" -var "sql_password=$(sqlPassword)"'
       InstallTerraform: true
       UseAzureSub: true
       ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
