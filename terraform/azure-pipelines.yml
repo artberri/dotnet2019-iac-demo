@@ -11,9 +11,9 @@ trigger:
     - src/README.md
     - src/LICENSE.md
 jobs:
-- job: pulumi
+- job: terraform
   pool:
-    vmImage: 'ubuntu-16.04'
+    vmImage: 'vs2017-win2016'
   steps:
   - task: DotNetCoreCLI@2
     inputs:
