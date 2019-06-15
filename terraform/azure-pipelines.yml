@@ -24,7 +24,7 @@ jobs:
     displayName: 'Build and publish ASP.NET Core app'
   - task: Terraform@2
     inputs:
-      TemplatePath: 'terraform/main.tf'
+      TemplatePath: 'terraform'
       Arguments: 'apply -target azurerm_app_service.main'
       InstallTerraform: true
       UseAzureSub: true
