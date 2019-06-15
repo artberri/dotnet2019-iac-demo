@@ -22,6 +22,10 @@ jobs:
       zipAfterPublish: false
       modifyOutputPath: false
     displayName: 'Build and publish ASP.NET Core app'
+  - script: |
+      python -m pip install --upgrade pip
+      pip install 'ansible[azure]'
+    displayName: 'Install dependencies'
   - task: ms-vscs-rm.vss-services-ansible.ansible-task.Ansible@0
     displayName: 'Run playbook'
     inputs:
