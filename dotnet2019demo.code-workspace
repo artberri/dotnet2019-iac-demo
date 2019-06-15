@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "arm",
+			"path": "arm"
+		},
+		{
 			"name": "ansible",
 			"path": "ansible"
 		},
