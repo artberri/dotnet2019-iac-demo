@@ -31,3 +31,9 @@ jobs:
       csmFile: arm/azuredeploy.json
       overrideParameters: '-sqlUsername $(sqlUsername) -sqlPassword $(sqlPassword)'
       deploymentMode: Complete
+  - task: AzureRmWebAppDeployment@4
+    displayName: 'Azure App Service Deploy'
+    inputs:
+      azureSubscription: PlainServicePrincipal
+      WebAppName: 'armdn2019-as'
+      packageForLinux: '$(System.DefaultWorkingDirectory)/bin/Debug/netcoreapp2.1/publish'
