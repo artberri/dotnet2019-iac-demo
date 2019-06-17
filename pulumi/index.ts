@@ -70,23 +70,30 @@ const appServicePlan = new azure.appservice.Plan(`${prefix}-asp`, {
     },
 });
 
-const app = new azure.appservice.AppService(`${prefix}-as`, {
-    ...resourceGroupArgs,
-    appServicePlanId: appServicePlan.id,
-    appSettings: {
-        "WEBSITE_RUN_FROM_ZIP": codeBlobUrl,
-        "ApplicationInsights:InstrumentationKey": appInsights.instrumentationKey,
-        "APPINSIGHTS_INSTRUMENTATIONKEY": appInsights.instrumentationKey,
-        "ASPNETCORE_ENVIRONMENT": "Development"
+const app = new azure.appservice.AppService(
+    `${prefix}-as`,
+    {
+        ...resourceGroupArgs,
+        name: `${prefix}-as`,
+        appServicePlanId: appServicePlan.id,
+        appSettings: {
+            "WEBSITE_RUN_FROM_ZIP": codeBlobUrl,
+            "ApplicationInsights:InstrumentationKey": appInsights.instrumentationKey,
+            "APPINSIGHTS_INSTRUMENTATIONKEY": appInsights.instrumentationKey,
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        connectionStrings: [{
+            name: "DbConnection",
+            value:
+                pulumi.all([sqlServer.name, database.name]).apply(([server, db]) =>
+                    `Server=tcp:${server}.database.windows.net;initial catalog=${db};user ID=${username};password=${pwd};Min Pool Size=0;Max Pool Size=30;Persist Security Info=true;`),
+            type: "SQLAzure"
+        }]
     },
-    connectionStrings: [{
-        name: "DbConnection",
-        value:
-            pulumi.all([sqlServer.name, database.name]).apply(([server, db]) =>
-                `Server=tcp:${server}.database.windows.net;initial catalog=${db};user ID=${username};password=${pwd};Min Pool Size=0;Max Pool Size=30;Persist Security Info=true;`),
-        type: "SQLAzure"
-    }]
-});
+    {
+        deleteBeforeReplace: true
+    }
+);
 
 const firewallRules = app.outboundIpAddresses.apply(
     ips => ips.split(',').map(
