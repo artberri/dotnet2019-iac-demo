@@ -22,6 +22,6 @@ jobs:
     displayName: 'Build and publish ASP.NET Core app'
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      PathtoPublish: 'src/bin/Debug/netcoreapp2.1/publish'
       ArtifactName: 'dotnetapp'
       publishLocation: 'Container'
