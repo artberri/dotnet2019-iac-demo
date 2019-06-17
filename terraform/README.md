@@ -17,7 +17,7 @@ To execute from this folder
 1. Initialize terraform:
 
     ```bash
-    terraform init
+    terraform init -backend-config=backend.tfvars
     ```
 
 1. Define SQL Server username:
