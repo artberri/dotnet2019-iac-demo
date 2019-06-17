@@ -98,10 +98,14 @@ const app = new azure.appservice.AppService(
 const firewallRules = app.outboundIpAddresses.apply(
     ips => ips.split(',').map(
         ip => new azure.sql.FirewallRule(`FR${ip}`, {
+            name: `FR${ip}`,
             endIpAddress: ip,
             resourceGroupName: resourceGroup.name,
             serverName: sqlServer.name,
             startIpAddress: ip,
+        },
+        {
+            deleteBeforeReplace: true
         })
     ));
 
