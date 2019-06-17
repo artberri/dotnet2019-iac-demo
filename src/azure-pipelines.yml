@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/*
+    exclude:
+    - src/README.md
+    - src/LICENSE.md
+jobs:
+- job: buildapp
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      projects: 'src'
+      zipAfterPublish: false
+      modifyOutputPath: false
+    displayName: 'Build and publish ASP.NET Core app'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'dotnetapp'
+      publishLocation: 'Container'
