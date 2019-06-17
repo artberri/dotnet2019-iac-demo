@@ -82,9 +82,9 @@
       "location": "[parameters('location')]",
       "properties": {},
       "sku": {
-        "name": "B1",
-        "tier": "Basic",
-        "size": "B1"
+        "name": "S1",
+        "tier": "Standard",
+        "size": "S1"
       }
     },
     {

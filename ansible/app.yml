@@ -70,7 +70,7 @@
         name: "{{ service_plan_name }}"
         resource_group: "{{ resource_group }}"
         location: "{{ location }}"
-        sku: B1
+        sku: S1
     - name: Create App
       azure_rm_webapp:
         name: "{{ app_name }}"

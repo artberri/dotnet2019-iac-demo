@@ -65,8 +65,8 @@ const appServicePlan = new azure.appservice.Plan(`${prefix}-asp`, {
     ...resourceGroupArgs,
     kind: "App",
     sku: {
-        tier: "Basic",
-        size: "B1",
+        tier: "Standard",
+        size: "S1",
     },
 });
 

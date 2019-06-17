@@ -91,8 +91,8 @@ resource "azurerm_app_service_plan" "main" {
   kind                = "App"
 
   sku {
-    tier = "Basic"
-    size = "B1"
+    tier = "Standard"
+    size = "S1"
   }
 }
 
