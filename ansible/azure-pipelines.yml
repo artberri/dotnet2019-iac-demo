@@ -5,11 +5,8 @@ trigger:
   paths:
     include:
     - ansible/*
-    - src/*
     exclude:
     - ansible/README.md
-    - src/README.md
-    - src/LICENSE.md
 jobs:
 - job: ansible
   pool:

@@ -5,11 +5,8 @@ trigger:
   paths:
     include:
     - terraform/*
-    - src/*
     exclude:
     - terraform/README.md
-    - src/README.md
-    - src/LICENSE.md
 jobs:
 - job: terraform
   pool:

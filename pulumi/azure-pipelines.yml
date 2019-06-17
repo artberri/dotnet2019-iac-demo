@@ -5,11 +5,8 @@ trigger:
   paths:
     include:
     - pulumi/*
-    - src/*
     exclude:
     - pulumi/README.md
-    - src/README.md
-    - src/LICENSE.md
 jobs:
 - job: pulumi
   pool:

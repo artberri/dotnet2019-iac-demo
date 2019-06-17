@@ -5,11 +5,8 @@ trigger:
   paths:
     include:
     - arm/*
-    - src/*
     exclude:
     - arm/README.md
-    - src/README.md
-    - src/LICENSE.md
 jobs:
 - job: arm
   pool:
